@@ -1,4 +1,10 @@
-FROM vstconsulting/images:tox AS build
+FROM python:3.6-buster AS build
+
+RUN apt-get update &&\
+    apt-get upgrade -y &&\
+    apt-get install -y libc6-dev python3-virtualenv gcc libffi-dev libkrb5-dev libffi6 libssl-dev libyaml-dev libsasl2-dev libldap2-dev default-libmysqlclient-dev sshpass git &&\
+    rm -rf /var/lib/apt/lists/* &&\
+    pip install tox
 
 WORKDIR /usr/local/project
 
